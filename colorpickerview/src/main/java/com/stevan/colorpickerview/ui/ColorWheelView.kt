@@ -96,6 +96,12 @@ class ColorWheelView @JvmOverloads constructor(
 
     fun setInitialColor(color: Int) {
         initialColor = color
+        setInitialColorSelectorPoint()
+    }
+
+    fun setCurrentColor(color: Int) {
+        currentColor = color
+        setColor(currentColor)
     }
 
     private fun getColorAtPoint(eventX: Float, eventY: Float): Int {
@@ -161,7 +167,8 @@ class ColorWheelView @JvmOverloads constructor(
     }
 
     private fun addSelectorView() {
-        val layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        val size = (Constants.SELECTOR_RADIUS_DP * 2 * resources.displayMetrics.density).toInt()
+        val layoutParams = LayoutParams(size, size)
         selector = ColorWheelSelector(context)
         selector.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.selector))
         addView(selector, layoutParams)
@@ -170,9 +177,12 @@ class ColorWheelView @JvmOverloads constructor(
     private fun addInitialSelectorView() {
         val layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         initialSelector = ColorWheelSelector(context)
-        initialSelector.setImageDrawable(ContextCompat.getDrawable(context,
-            R.drawable.selector
-        ))
+        initialSelector.setImageDrawable(
+            ContextCompat.getDrawable(
+                context,
+                R.drawable.selector
+            )
+        )
         initialSelector.alpha = 0.75f
         addView(initialSelector, layoutParams)
     }

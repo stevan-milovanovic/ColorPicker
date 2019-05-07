@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ColorPicker</string>
+    <string name="set_initial_color">Set Initial Color</string>
+    <string name="set_current_color">Set Current Color</string>
 </resources>
