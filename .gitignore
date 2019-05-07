@@ -83,6 +83,4 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
-gradlew
-gradlew.bat
 .idea
