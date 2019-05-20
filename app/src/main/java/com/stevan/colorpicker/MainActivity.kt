@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         val colorWheelView = findViewById<ColorWheelView>(R.id.colorWheelView)
         colorWheelView.setCurrentColor(ContextCompat.getColor(this, R.color.colorAccent))
-        colorWheelView.setInitialColor(ContextCompat.getColor(this, R.color.colorAccent))
+        colorWheelView.hideInitialColor()
 
         colorWheelView.subscribe(object : ColorObserver {
             override fun onColor(color: Int, fromUser: Boolean) {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         findViewById<Button>(R.id.setInitialColorButton).setOnClickListener {
-            colorWheelView.setInitialColor(Color.BLUE)
+            colorWheelView.setInitialColor(ContextCompat.getColor(this, R.color.colorAccent))
         }
 
         findViewById<Button>(R.id.setCurrentColorButton).setOnClickListener {

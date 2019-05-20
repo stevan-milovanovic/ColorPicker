@@ -94,8 +94,13 @@ class ColorWheelView @JvmOverloads constructor(
 
     override fun getColor(): Int = emitter.getColor()
 
+    fun hideInitialColor() {
+        removeView(initialSelector)
+    }
+
     fun setInitialColor(color: Int) {
         initialColor = color
+        addInitialSelectorView()
         setInitialColorSelectorPoint()
     }
 
