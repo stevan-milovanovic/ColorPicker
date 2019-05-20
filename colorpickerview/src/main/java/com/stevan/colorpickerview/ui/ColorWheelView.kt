@@ -21,7 +21,7 @@ class ColorWheelView @JvmOverloads constructor(
     private var centerY: Float = 0f
 
     private lateinit var selector: ColorWheelSelector
-    private lateinit var initialSelector: ColorWheelSelector
+    private var initialSelector: ColorWheelSelector? = null
 
     private val emitter = ColorObservableEmitter()
     private val handler = ThrottledTouchEventHandler(this)
@@ -36,7 +36,6 @@ class ColorWheelView @JvmOverloads constructor(
     init {
         selectorRadiusPx = Constants.SELECTOR_RADIUS_DP * resources.displayMetrics.density
         addColorWheelPaletteView()
-        addInitialSelectorView()
         addSelectorView()
     }
 
@@ -96,11 +95,16 @@ class ColorWheelView @JvmOverloads constructor(
 
     fun hideInitialColor() {
         removeView(initialSelector)
+        initialSelector = null
     }
 
     fun setInitialColor(color: Int) {
         initialColor = color
-        addInitialSelectorView()
+
+        if (initialSelector == null) {
+            addInitialSelectorView()
+        }
+
         setInitialColorSelectorPoint()
     }
 
@@ -153,7 +157,7 @@ class ColorWheelView @JvmOverloads constructor(
         }
 
         val initialPoint = PointF(x.toFloat() + centerX, y.toFloat() + centerY)
-        initialSelector.point = initialPoint
+        initialSelector?.point = initialPoint
     }
 
     private fun updateSelector(eventX: Float, eventY: Float) {
@@ -182,14 +186,14 @@ class ColorWheelView @JvmOverloads constructor(
     private fun addInitialSelectorView() {
         val layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         initialSelector = ColorWheelSelector(context)
-        initialSelector.setImageDrawable(
+        initialSelector!!.setImageDrawable(
             ContextCompat.getDrawable(
                 context,
                 R.drawable.selector
             )
         )
-        initialSelector.alpha = 0.75f
-        addView(initialSelector, layoutParams)
+        initialSelector!!.alpha = 0.75f
+        addView(initialSelector, childCount - 1, layoutParams)
     }
 
     private fun addColorWheelPaletteView() {
