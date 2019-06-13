@@ -176,7 +176,7 @@ class ColorWheelView @JvmOverloads constructor(
     }
 
     private fun addSelectorView() {
-        val size = (Constants.SELECTOR_RADIUS_DP * 2 * resources.displayMetrics.density).toInt()
+        val size = (Constants.SELECTOR_RADIUS_DP * 1.5 * resources.displayMetrics.density).toInt()
         val layoutParams = LayoutParams(size, size)
         selector = ColorWheelSelector(context)
         selector.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.selector))
